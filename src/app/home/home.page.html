@@ -1,14 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Books
     </ion-title>
   </ion-toolbar>
+  <ion-list>
+    <ion-label>Recherche</ion-label>
+    <ion-input type="text" placeholder="1983, Chroniques martiennes" [(ngModel)]="search"></ion-input>
+  </ion-list>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content refreshingText="Chargement en cours..." refreshinSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngFor="let book of bookList">
+      <img src="{{book.volumeInfo.imageLinks.thumbnail}}">
+      <ion-label>Titre: {{book.volumeInfo.title}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll treshold="10%" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement en cours...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
