@@ -9,7 +9,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class HomePage {
 
   public apiBooksKey: string = "AIzaSyAIKBVlFQxpdw6VAiAWR-K5zfETR8vlwQM";
-  public search: string;
+  public search: string = "a";
   public bookList: Array<any> = [];
   public index: any = 0;
   public choiceMaxResults: any = 20;
@@ -46,11 +46,14 @@ export class HomePage {
       } else {
         this.bookList = this.bookList.concat(data.items);
       }
+      console.log(even);
       if (even) {
-        even.target.complet();
+        even.target.complete();
       }
       console.log(this.bookList);
     })
+
+
 
   }
 
